@@ -1,0 +1,450 @@
+# Assignment Questions 12
+
+<aside>
+💡 **Question 1**
+
+Given a singly linked list, delete **middle** of the linked list. For example, if given linked list is 1->2->**3**->4->5 then linked list should be modified to 1->2->4->5.If there are **even** nodes, then there would be **two middle** nodes, we need to delete the second middle element. For example, if given linked list is 1->2->3->4->5->6 then it should be modified to 1->2->3->5->6.If the input linked list is NULL or has 1 node, then it should return NULL
+
+**Example 1:**
+
+```
+Input:
+LinkedList: 1->2->3->4->5
+Output:1 2 4 5
+
+```
+
+**Example 2:**
+
+```
+Input:
+LinkedList: 2->4->6->7->5->1
+Output:2 4 6 5 1
+```
+
+</aside>
+
+<aside>
+💡 **Question 2**
+
+Given a linked list of **N** nodes. The task is to check if the linked list has a loop. Linked list can contain self loop.
+
+**Example 1:**
+
+```
+Input:
+N = 3
+value[] = {1,3,4}
+x(position at which tail is connected) = 2
+Output:True
+Explanation:In above test case N = 3.
+The linked list with nodes N = 3 is
+given. Then value of x=2 is given which
+means last node is connected with xth
+node of linked list. Therefore, there
+exists a loop.
+```
+
+**Example 2:**
+
+```
+Input:
+N = 4
+value[] = {1,8,3,4}
+x = 0
+Output:False
+Explanation:For N = 4 ,x = 0 means
+then lastNode->next = NULL, then
+the Linked list does not contains
+any loop.
+```
+
+</aside>
+
+<aside>
+💡 **Question 3**
+
+Given a linked list consisting of **L** nodes and given a number **N**. The task is to find the **N**th node from the end of the linked list.
+
+**Example 1:**
+
+```
+Input:
+N = 2
+LinkedList: 1->2->3->4->5->6->7->8->9
+Output:8
+Explanation:In the first example, there
+are 9 nodes in linked list and we need
+to find 2nd node from end. 2nd node
+from end is 8.
+
+```
+
+**Example 2:**
+
+</aside>
+
+
+<aside>
+💡 **Question 5**
+
+Given a linked list of **N** nodes such that it may contain a loop.
+
+A loop here means that the last node of the link list is connected to the node at position X(1-based index). If the link list does not have any loop, X=0.
+
+Remove the loop from the linked list, if it is present, i.e. unlink the last node which is forming the loop.
+
+**Example 1:**
+
+```
+Input:
+N = 3
+value[] = {1,3,4}
+X = 2
+Output:1
+Explanation:The link list looks like
+1 -> 3 -> 4
+     ^    |
+     |____|
+A loop is present. If you remove it
+successfully, the answer will be 1.
+
+```
+
+**Example 2:**
+
+```
+Input:
+N = 4
+value[] = {1,8,3,4}
+X = 0
+Output:1
+Explanation:The Linked list does not
+contains any loop.
+```
+
+**Example 3:**
+
+```
+Input:
+N = 4
+value[] = {1,2,3,4}
+X = 1
+Output:1
+Explanation:The link list looks like
+1 -> 2 -> 3 -> 4
+^              |
+|______________|
+A loop is present.
+If you remove it successfully,
+the answer will be 1.
+```
+
+</aside>
+
+<aside>
+💡 **Question 6**
+
+Given a linked list and two integers M and N. Traverse the linked list such that you retain M nodes then delete next N nodes, continue the same till end of the linked list.
+
+Difficulty Level: Rookie
+
+**Examples**:
+
+```
+Input:
+M = 2, N = 2
+Linked List: 1->2->3->4->5->6->7->8
+Output:
+Linked List: 1->2->5->6
+
+Input:
+M = 3, N = 2
+Linked List: 1->2->3->4->5->6->7->8->9->10
+Output:
+Linked List: 1->2->3->6->7->8
+
+Input:
+M = 1, N = 1
+Linked List: 1->2->3->4->5->6->7->8->9->10
+Output:
+Linked List: 1->3->5->7->9
+```
+
+</aside>
+
+<aside>
+💡 **Question 7**
+
+Given two linked lists, insert nodes of second list into first list at alternate positions of first list.
+For example, if first list is 5->7->17->13->11 and second is 12->10->2->4->6, the first list should become 5->12->7->10->17->2->13->4->11->6 and second list should become empty. The nodes of second list should only be inserted when there are positions available. For example, if the first list is 1->2->3 and second list is 4->5->6->7->8, then first list should become 1->4->2->5->3->6 and second list to 7->8.
+
+Use of extra space is not allowed (Not allowed to create additional nodes), i.e., insertion must be done in-place. Expected time complexity is O(n) where n is number of nodes in first list.
+
+</aside>
+
+---Assignment 12 Answers----
+💡 Question 1
+
+To delete the middle node(s) from a singly linked list, we can use the two-pointer technique. We initialize two pointers, slow and fast, both pointing to the head of the linked list. The slow pointer moves one node at a time, while the fast pointer moves two nodes at a time. When the fast pointer reaches the end of the linked list, the slow pointer will be pointing to the middle node(s).
+
+Here's the solution:
+
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def deleteMiddleNode(head):
+    if not head or not head.next:
+        return None
+    slow = fast = head
+    prev = None
+    while fast and fast.next:
+        fast = fast.next.next
+        prev = slow
+        slow = slow.next
+    prev.next = slow.next
+    return head
+Example usage:
+
+
+# Create the linked list: 1 -> 2 -> 3 -> 4 -> 5
+head = ListNode(1)
+head.next = ListNode(2)
+head.next.next = ListNode(3)
+head.next.next.next = ListNode(4)
+head.next.next.next.next = ListNode(5)
+
+new_head = deleteMiddleNode(head)
+
+# Print the modified linked list: 1 -> 2 -> 4 -> 5
+while new_head:
+    print(new_head.val, end=" ")
+    new_head = new_head.next
+💡 Question 2
+
+To check if a linked list has a loop, we can use the Floyd's Tortoise and Hare algorithm, also known as the cycle detection algorithm. We initialize two pointers, slow and fast, both pointing to the head of the linked list. The slow pointer moves one node at a time, while the fast pointer moves two nodes at a time. If there is a loop in the linked list, the slow and fast pointers will eventually meet. If the fast pointer reaches the end of the linked list (i.e., becomes None), there is no loop in the linked list.
+
+Here's the solution:
+
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def hasCycle(head):
+    slow = fast = head
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+        if slow == fast:
+            return True
+    return False
+Example usage:
+
+
+# Create a linked list with a loop: 1 -> 2 -> 3 -> 4 -> 5 -> 2
+head = ListNode(1)
+head.next = ListNode(2)
+head.next.next = ListNode(3)
+head.next.next.next = ListNode(4)
+head.next.next.next.next = ListNode(5)
+head.next.next.next.next.next = head.next
+
+print(hasCycle(head))  # Output: True
+
+# Create a linked list without a loop: 1 -> 2 -> 3 -> 4 -> 5
+head = ListNode(1)
+head.next = ListNode(2)
+head.next.next = ListNode(3)
+head.next.next.next = ListNode(4)
+head.next.next.next.next = ListNode(5)
+
+print(hasCycle(head))  # Output: False
+💡 Question 3
+
+To find the Nth node from the end of a linked list, we can use the two-pointer technique. We initialize two pointers, first and second, both pointing to the head of the linked list. We move the first pointer N nodes ahead. Then, we move both pointers one node at a time until the first pointer reaches the end of the linked list. At this point, the second pointer will be pointing to the Nth node from the end.
+
+Here's the solution:
+
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def findNthFromEnd(head, n):
+    first = second = head
+    for _ in range(n):
+        if not first:
+            return None
+        first = first.next
+    while first:
+        first = first.next
+        second = second.next
+    return second.val
+Example usage:
+
+
+# Create the linked list: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9
+head = ListNode(1)
+head.next = ListNode(2)
+head.next.next = ListNode(3)
+head.next.next.next = ListNode(4)
+head.next.next.next.next = ListNode(5)
+head.next.next.next.next.next = ListNode(6)
+head.next.next.next.next.next.next = ListNode(7)
+head.next.next.next.next.next.next.next = ListNode(8)
+head.next.next.next.next.next.next.next.next = ListNode(9)
+
+print(findNthFromEnd(head, 2))  # Output: 8
+💡 Question 5
+
+To remove the loop from a linked list, we can use the Floyd's Tortoise and Hare algorithm. First, we detect if there is a loop in the linked list using the algorithm. If a loop is found, we initialize two pointers, ptr1 and ptr2, both pointing to the head of the linked list. Then, we move the ptr2 pointer ahead by the number of nodes in the loop. After that, we move both pointers one node at a time until they meet again. At this point, the ptr1 and ptr2 pointers will be pointing to the node just before the loop starts. We set the next pointer of the last node in the loop to None to remove the loop.
+
+Here's the solution:
+
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def removeLoop(head):
+    if not head or not head.next:
+        return head
+    slow = fast = head
+    has_loop = False
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+        if slow == fast:
+            has_loop = True
+            break
+    if not has_loop:
+        return head
+    ptr1 = head
+    while ptr1.next != fast.next:
+        ptr1 = ptr1.next
+        fast = fast.next
+    fast.next = None
+    return head
+Example usage:
+
+
+# Create a linked list with a loop: 1 -> 3 -> 4 -> 2 (loop)
+head = ListNode(1)
+head.next = ListNode(3)
+head.next.next = ListNode(4)
+head.next.next.next = ListNode(2)
+head.next.next.next.next = head.next
+
+new_head = removeLoop(head)
+
+# Print the modified linked list: 1 -> 3 -> 4 -> 2 (loop removed)
+while new_head:
+    print(new_head.val, end=" ")
+    new_head = new_head.next
+💡 Question 6
+
+To traverse a linked list and retain M nodes while deleting the next N nodes, we can iterate through the linked list and keep track of M and N counts. When the M count is reached, we keep the node and start deleting the next N nodes until the N count is reached. Then we reset the counts and continue the process until the end of the linked list.
+
+Here's the solution:
+
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def deleteNodes(head, M, N):
+    if not head:
+        return head
+    curr = head
+    m_count = n_count = 0
+    while curr:
+        m_count += 1
+        if m_count == M:
+            prev = curr
+        if m_count == M + 1:
+            n_count = 1
+        if n_count == N + 1:
+            m_count = n_count = 0
+        if n_count > 0:
+            prev.next = curr.next
+        else:
+            prev = curr
+        curr = curr.next
+    return head
+Example usage:
+
+
+# Create the linked list: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
+head = ListNode(1)
+head.next = ListNode(2)
+head.next.next = ListNode(3)
+head.next.next.next = ListNode(4)
+head.next.next.next.next = ListNode(5)
+head.next.next.next.next.next = ListNode(6)
+head.next.next.next.next.next.next = ListNode(7)
+head.next.next.next.next.next.next.next = ListNode(8)
+
+new_head = deleteNodes(head, 2, 2)
+
+# Print the modified linked list: 1 -> 2 -> 5 -> 6
+while new_head:
+    print(new_head.val, end=" ")
+    new_head = new_head.next
+💡 Question 7
+
+To insert nodes from the second linked list into alternate positions of the first linked list, we can iterate through both linked lists simultaneously. We initialize two pointers, first and second, pointing to the heads of the first and second linked lists, respectively. We keep track of the next pointers of both first and second nodes. At each step, we set the next pointer of the second node to the next pointer of the first node, and update the next pointer of the first node to the second node. Finally, we update the first pointer to the next pointer of the original first node, and the second pointer to the next pointer of the original second node. We continue this process until either of the linked lists reaches the end.
+
+Here's the solution:
+
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def mergeLists(first, second):
+    if not first:
+        return second
+    if not second:
+        return first
+    first_curr = first
+    second_curr = second
+    while first_curr and second_curr:
+        first_next = first_curr.next
+        second_next = second_curr.next
+        first_curr.next = second_curr
+        second_curr.next = first_next
+        first_curr = first_next
+        second_curr = second_next
+    return first
+Example usage:
+
+
+# Create the first linked list: 5 -> 7 -> 17 -> 13 -> 11
+first_head = ListNode(5)
+first_head.next = ListNode(7)
+first_head.next.next = ListNode(17)
+first_head.next.next.next = ListNode(13)
+first_head.next.next.next.next = ListNode(11)
+
+# Create the second linked list: 12 -> 10 -> 2 -> 4 -> 6
+second_head = ListNode(12)
+second_head.next = ListNode(10)
+second_head.next.next = ListNode(2)
+second_head.next.next.next = ListNode(4)
+second_head.next.next.next.next = ListNode(6)
+
+merged_head = mergeLists(first_head, second_head)
+
+# Print the modified first linked list: 5 -> 12 -> 7 -> 10 -> 17 -> 2 -> 13 -> 4 -> 11 -> 6
+while merged_head:
+    print(merged_head.val, end=" ")
+    merged_head = merged_head.next

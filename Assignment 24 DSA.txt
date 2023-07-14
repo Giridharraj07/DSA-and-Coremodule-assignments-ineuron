@@ -1,0 +1,463 @@
+# Assignment Questions 24
+
+<aside>
+💡 1. **Roman to Integer**
+
+Roman numerals are represented by seven different symbols: `I`, `V`, `X`, `L`, `C`, `D` and `M`.
+
+```
+SymbolValue
+I             1
+V             5
+X             10
+L             50
+C             100
+D             500
+M             1000
+```
+
+For example, `2` is written as `II` in Roman numeral, just two ones added together. `12` is written as `XII`, which is simply `X + II`. The number `27` is written as `XXVII`, which is `XX + V + II`.
+
+Roman numerals are usually written largest to smallest from left to right. However, the numeral for four is not `IIII`. Instead, the number four is written as `IV`. Because the one is before the five we subtract it making four. The same principle applies to the number nine, which is written as `IX`. There are six instances where subtraction is used:
+
+- `I` can be placed before `V` (5) and `X` (10) to make 4 and 9.
+- `X` can be placed before `L` (50) and `C` (100) to make 40 and 90.
+- `C` can be placed before `D` (500) and `M` (1000) to make 400 and 900.
+
+Given a roman numeral, convert it to an integer.
+
+**Example 1:**
+
+```
+Input: s = "III"
+Output: 3
+Explanation: III = 3.
+```
+
+**Example 2:**
+
+```
+Input: s = "LVIII"
+Output: 58
+Explanation: L = 50, V= 5, III = 3.
+```
+
+**Constraints:**
+
+- `1 <= s.length <= 15`
+- `s` contains only the characters `('I', 'V', 'X', 'L', 'C', 'D', 'M')`.
+- It is **guaranteed** that `s` is a valid roman numeral in the range `[1, 3999]`.
+****
+</aside>
+
+<aside>
+💡 2. **Longest Substring Without Repeating Characters**
+
+Given a string `s`, find the length of the **longest substring** without repeating characters.
+
+**Example 1:**
+
+```
+Input: s = "abcabcbb"
+Output: 3
+Explanation: The answer is "abc", with the length of 3.
+```
+
+**Example 2:**
+
+```
+Input: s = "bbbbb"
+Output: 1
+Explanation: The answer is "b", with the length of 1.
+```
+
+**Example 3:**
+
+```
+Input: s = "pwwkew"
+Output: 3
+Explanation: The answer is "wke", with the length of 3.
+Notice that the answer must be a substring, "pwke" is a subsequence and not a substring.
+```
+
+**Constraints:**
+
+- `0 <= s.length <= 50000`
+- `s` consists of English letters, digits, symbols and spaces.
+</aside>
+
+<aside>
+💡 3. **Majority Element**
+
+Given an array `nums` of size `n`, return *the majority element*.
+
+The majority element is the element that appears more than `⌊n / 2⌋` times. You may assume that the majority element always exists in the array.
+
+**Example 1:**
+
+```
+Input: nums = [3,2,3]
+Output: 3
+```
+
+**Example 2:**
+
+```
+Input: nums = [2,2,1,1,1,2,2]
+Output: 2
+```
+
+**Constraints:**
+
+- `n == nums.length`
+- `1 <= n <= 5 * 10^4`
+- `-10^9 <= nums[i] <= 10^9`
+</aside>
+
+<aside>
+💡 4. **Group Anagram**
+
+Given an array of strings `strs`, group **the anagrams** together. You can return the answer in **any order**.
+
+An **Anagram** is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.
+
+**Example 1:**
+
+```
+Input: strs = ["eat","tea","tan","ate","nat","bat"]
+Output: [["bat"],["nat","tan"],["ate","eat","tea"]]
+```
+
+**Example 2:**
+
+```
+Input: strs = [""]
+Output: [[""]]
+```
+
+**Example 3:**
+
+```
+Input: strs = ["a"]
+Output: [["a"]]
+```
+
+**Constraints:**
+
+- `1 <= strs.length <= 10000`
+- `0 <= strs[i].length <= 100`
+- `strs[i]` consists of lowercase English letters.
+</aside>
+
+<aside>
+💡 5. **Ugly Numbers**
+
+An **ugly number** is a positive integer whose prime factors are limited to `2`, `3`, and `5`.
+
+Given an integer `n`, return *the* `nth` ***ugly number***.
+
+**Example 1:**
+
+```
+Input: n = 10
+Output: 12
+Explanation: [1, 2, 3, 4, 5, 6, 8, 9, 10, 12] is the sequence of the first 10 ugly numbers.
+```
+
+**Example 2:**
+
+```
+Input: n = 1
+Output: 1
+Explanation: 1 has no prime factors, therefore all of its prime factors are limited to 2, 3, and 5.
+```
+
+**Constraints:**
+
+- `1 <= n <= 1690`
+</aside>
+
+<aside>
+💡 6. **Top K Frequent Words**
+
+Given an array of strings `words` and an integer `k`, return *the* `k` *most frequent strings*.
+
+Return the answer **sorted** by **the frequency** from highest to lowest. Sort the words with the same frequency by their **lexicographical order**.
+
+**Example 1:**
+
+```
+Input: words = ["i","love","leetcode","i","love","coding"], k = 2
+Output: ["i","love"]
+Explanation: "i" and "love" are the two most frequent words.
+Note that "i" comes before "love" due to a lower alphabetical order.
+```
+
+**Example 2:**
+
+```
+Input: words = ["the","day","is","sunny","the","the","the","sunny","is","is"], k = 4
+Output: ["the","is","sunny","day"]
+Explanation: "the", "is", "sunny" and "day" are the four most frequent words, with the number of occurrence being 4, 3, 2 and 1 respectively.
+```
+
+**Constraints:**
+
+- `1 <= words.length <= 500`
+- `1 <= words[i].length <= 10`
+- `words[i]` consists of lowercase English letters.
+- `k` is in the range `[1, The number of **unique** words[i]]`
+</aside>
+
+<aside>
+💡 7. **Sliding Window Maximum**
+
+You are given an array of integers `nums`, there is a sliding window of size `k` which is moving from the very left of the array to the very right. You can only see the `k` numbers in the window. Each time the sliding window moves right by one position.
+
+Return *the max sliding window*.
+
+**Example 1:**
+
+```
+Input: nums = [1,3,-1,-3,5,3,6,7], k = 3
+Output: [3,3,5,5,6,7]
+Explanation:
+Window position                Max
+---------------               -----
+[1  3  -1] -3  5  3  6 7         3
+ 1 [3  -1  -3] 5  3  6 7         3
+ 1  3 [-1  -3  5] 3  6 7         5
+ 1  3  -1 [-3  5  3] 6 7         5
+ 1  3  -1  -3 [5  3  6]7         6
+ 1  3  -1  -3  5 [3  6  7]       7
+```
+
+**Example 2:**
+
+```
+Input: nums = [1], k = 1
+Output: [1]
+```
+
+**Constraints:**
+
+- `1 <= nums.length <= 100000`
+- -`10000 <= nums[i] <= 10000`
+- `1 <= k <= nums.length`
+</aside>
+
+<aside>
+💡 8. **Find K Closest Elements**
+
+Given a **sorted** integer array `arr`, two integers `k` and `x`, return the `k` closest integers to `x` in the array. The result should also be sorted in ascending order.
+
+An integer `a` is closer to `x` than an integer `b` if:
+
+- `|a - x| < |b - x|`, or
+- `|a - x| == |b - x|` and `a < b`
+
+**Example 1:**
+
+```
+Input: arr = [1,2,3,4,5], k = 4, x = 3
+Output: [1,2,3,4]
+```
+
+**Example 2:**
+
+```
+Input: arr = [1,2,3,4,5], k = 4, x = -1
+Output: [1,2,3,4]
+```
+
+**Constraints:**
+
+- `1 <= k <= arr.length`
+- `1 <= arr.length <= 10000`
+- `arr` is sorted in **ascending** order.
+- -`10000 <= arr[i], x <= 10000`
+
+</aside>
+
+------Answers Assignment 24-----
+💡 Question 1: Roman to Integer
+
+To convert a Roman numeral to an integer, we can iterate over the characters of the Roman numeral from left to right. If the current character represents a smaller value than the next character, we subtract its value from the total. Otherwise, we add its value to the total. At the end of the iteration, we return the total.
+
+Here's the solution:
+
+
+def romanToInt(s):
+    roman_map = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+    total = 0
+
+    for i in range(len(s) - 1):
+        if roman_map[s[i]] < roman_map[s[i+1]]:
+            total -= roman_map[s[i]]
+        else:
+            total += roman_map[s[i]]
+
+    total += roman_map[s[-1]]
+
+    return total
+💡 Question 2: Longest Substring Without Repeating Characters
+
+To find the length of the longest substring without repeating characters, we can use the sliding window technique. We maintain a set to store the unique characters in the current window. We initialize two pointers, left and right, to represent the left and right boundaries of the window. We move the right pointer to expand the window until we encounter a repeating character. When a repeating character is found, we move the left pointer to shrink the window, removing the leftmost character from the set, until the repeating character is no longer in the set. We update the maximum length of the non-repeating substring during this process.
+
+Here's the solution:
+
+
+def lengthOfLongestSubstring(s):
+    if not s:
+        return 0
+
+    left = 0
+    right = 0
+    max_length = 0
+    char_set = set()
+
+    while right < len(s):
+        if s[right] not in char_set:
+            char_set.add(s[right])
+            max_length = max(max_length, right - left + 1)
+            right += 1
+        else:
+            char_set.remove(s[left])
+            left += 1
+
+    return max_length
+💡 Question 3: Majority Element
+
+To find the majority element in an array, we can use the Boyer-Moore Voting Algorithm. The algorithm makes two passes over the array. In the first pass, we find a potential majority candidate. In the second pass, we verify if the candidate appears more than n/2 times in the array.
+
+Here's the solution:
+
+
+def majorityElement(nums):
+    candidate = None
+    count = 0
+
+    for num in nums:
+        if count == 0:
+            candidate = num
+        count += (1 if num == candidate else -1)
+
+    count = 0
+    for num in nums:
+        if num == candidate:
+            count += 1
+
+    if count > len(nums) // 2:
+        return candidate
+💡 Question 4: Group Anagram
+
+To group anagrams together, we can use a dictionary to store the list of anagrams for each sorted word. We iterate over the input array of strings and for each word, we sort its characters to get the sorted word. We use the sorted word as a key in the dictionary and append the original word to the list of anagrams corresponding to that key. Finally, we return the values of the dictionary, which represent the grouped anagrams.
+
+Here's the solution:
+
+
+def groupAnagrams(strs):
+    anagram_map = {}
+    for word in strs:
+        sorted_word = ''.join(sorted(word))
+        if sorted_word in anagram_map:
+            anagram_map[sorted_word].append(word)
+        else:
+            anagram_map[sorted_word] = [word]
+    return list(anagram_map.values())
+💡 Question 5: Ugly Numbers
+
+To find the nth ugly number, we can use dynamic programming. We initialize a list ugly of size n to store the ugly numbers. We also initialize three pointers, p2, p3, and p5, to keep track of the indices for multiplying by 2, 3, and 5, respectively. We start with the first ugly number ugly[0] = 1 and update the next ugly numbers by multiplying the current ugly numbers with 2, 3, and 5 and choosing the minimum. We move the corresponding pointers when a number is chosen. Finally, we return the last element of the ugly list, which represents the nth ugly number.
+
+Here's the solution:
+
+
+def nthUglyNumber(n):
+    ugly = [0] * n
+    ugly[0] = 1
+    p2 = p3 = p5 = 0
+
+    for i in range(1, n):
+        ugly[i] = min(ugly[p2] * 2, ugly[p3] * 3, ugly[p5] * 5)
+        if ugly[i] == ugly[p2] * 2:
+            p2 += 1
+        if ugly[i] == ugly[p3] * 3:
+            p3 += 1
+        if ugly[i] == ugly[p5] * 5:
+            p5 += 1
+
+    return ugly[-1]
+💡 Question 6: Top K Frequent Words
+
+To find the k most frequent strings in an array, we can use a combination of dictionary and heap. We first count the frequency of each word using a dictionary. Then, we create a max heap where each element is a tuple (frequency, word) sorted by frequency in descending order. We push each element from the dictionary into the heap. Finally, we pop the top k elements from the heap and return the words in the desired order.
+
+Here's the solution:
+
+import heapq
+from collections import Counter
+
+def topKFrequent(words, k):
+    count = Counter(words)
+    heap = []
+
+    for word, frequency in count.items():
+        heapq.heappush(heap, (-frequency, word))
+
+    top_k = []
+    for _ in range(k):
+        top_k.append(heapq.heappop(heap)[1])
+
+    return top_k
+💡 Question 7: Sliding Window Maximum
+
+To find the maximum sliding window of size k in an array, we can use a deque to store the indices of the elements in the current window. We iterate over the array and for each element, we do the following:
+
+Remove the indices that are outside the current window from the front of the deque.
+Remove the indices of elements that are smaller than the current element from the back of the deque.
+Append the current index to the back of the deque.
+If the index at the front of the deque is outside the current window, remove it.
+If the current index is greater than or equal to k - 1, add the maximum element (corresponding to the index at the front of the deque) to the result.
+Here's the solution:
+
+
+from collections import deque
+
+def maxSlidingWindow(nums, k):
+    window = deque()
+    result = []
+
+    for i in range(len(nums)):
+        # Remove indices outside the current window
+        while window and window[0] <= i - k:
+            window.popleft()
+
+        # Remove indices of smaller elements
+        while window and nums[window[-1]] < nums[i]:
+            window.pop()
+
+        # Add the current index to the window
+        window.append(i)
+
+        # Add the maximum element to the result
+        if i >= k - 1:
+            result.append(nums[window[0]])
+
+    return result
+💡 Question 8: Find K Closest Elements
+
+To find the k closest integers to a given value x in a sorted array, we can use binary search to find the position of x in the array. Once we find the position, we can use two pointers to expand the window around x and include the closest k elements. The left pointer starts from the position of x and moves left, while the right pointer starts from the position of x + 1 and moves right. We compare the absolute differences between x and the elements pointed by the left and right pointers and include the closer element in the result. We continue this process until we have included k elements in the result.
+
+Here's the solution:
+
+
+def findClosestElements(arr, k, x):
+    left = 0
+    right = len(arr) - 1
+
+    while right - left + 1 > k:
+        if abs(arr[left] - x) > abs(arr[right] - x):
+            left += 1
+        else:
+            right -= 1
+
+    return arr[left:right+1]

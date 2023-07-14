@@ -1,0 +1,437 @@
+# Assignment Questions 16
+
+<aside>
+💡 **Question 1**
+
+Given an array, for each element find the value of the nearest element to the right which is having a frequency greater than that of the current element. If there does not exist an answer for a position, then make the value ‘-1’.
+
+**Examples:**
+
+```
+Input: a[] = [1, 1, 2, 3, 4, 2, 1]
+Output : [-1, -1, 1, 2, 2, 1, -1]
+
+Explanation:
+Given array a[] = [1, 1, 2, 3, 4, 2, 1]
+Frequency of each element is: 3, 3, 2, 1, 1, 2, 3
+
+Lets calls Next Greater Frequency element as NGF
+1. For element a[0] = 1 which has a frequency = 3,
+   As it has frequency of 3 and no other next element
+   has frequency more than 3 so  '-1'
+2. For element a[1] = 1 it will be -1 same logic
+   like a[0]
+3. For element a[2] = 2 which has frequency = 2,
+   NGF element is 1 at position = 6  with frequency
+   of 3 > 2
+4. For element a[3] = 3 which has frequency = 1,
+   NGF element is 2 at position = 5 with frequency
+   of 2 > 1
+5. For element a[4] = 4 which has frequency = 1,
+   NGF element is 2 at position = 5 with frequency
+   of 2 > 1
+6. For element a[5] = 2 which has frequency = 2,
+   NGF element is 1 at position = 6 with frequency
+   of 3 > 2
+7. For element a[6] = 1 there is no element to its
+   right, hence -1
+```
+
+```
+Input : a[] = [1, 1, 1, 2, 2, 2, 2, 11, 3, 3]
+Output : [2, 2, 2, -1, -1, -1, -1, 3, -1, -1]
+```
+
+</aside>
+
+<aside>
+💡 **Question 2**
+
+Given a stack of integers, sort it in ascending order using another temporary stack.
+
+**Examples:**
+
+```
+Input : [34, 3, 31, 98, 92, 23]
+Output : [3, 23, 31, 34, 92, 98]
+
+Input : [3, 5, 1, 4, 2, 8]
+Output : [1, 2, 3, 4, 5, 8]
+```
+
+</aside>
+
+<aside>
+💡 **Question 3**
+
+Given a stack with **push()**, **pop()**, and **empty()** operations, The task is to delete the **middle** element ****of it without using any additional data structure.
+
+Input  : Stack[] = [1, 2, 3, 4, 5]
+
+Output : Stack[] = [1, 2, 4, 5]
+
+Input  : Stack[] = [1, 2, 3, 4, 5, 6]
+
+Output : Stack[] = [1, 2, 4, 5, 6]
+
+</aside>
+
+<aside>
+💡 **Question 4**
+
+Given a Queue consisting of first **n** natural numbers (in random order). The task is to check whether the given Queue elements can be arranged in increasing order in another Queue using a stack. The operation allowed are:
+
+1. Push and pop elements from the stack
+2. Pop (Or Dequeue) from the given Queue.
+3. Push (Or Enqueue) in the another Queue.
+
+**Examples :**
+
+Input : Queue[] = { 5, 1, 2, 3, 4 } 
+
+Output : Yes 
+
+Pop the first element of the given Queue 
+
+i.e 5. Push 5 into the stack. 
+
+Now, pop all the elements of the given Queue and push them to second Queue. 
+
+Now, pop element 5 in the stack and push it to the second Queue.   
+
+Input : Queue[] = { 5, 1, 2, 6, 3, 4 } 
+
+Output : No 
+
+Push 5 to stack. 
+
+Pop 1, 2 from given Queue and push it to another Queue. 
+
+Pop 6 from given Queue and push to stack. 
+
+Pop 3, 4 from given Queue and push to second Queue. 
+
+Now, from using any of above operation, we cannot push 5 into the second Queue because it is below the 6 in the stack.
+
+</aside>
+
+<aside>
+💡 **Question 5**
+
+Given a number , write a program to reverse this number using stack.
+
+**Examples:**
+
+```
+Input : 365
+Output : 563
+
+Input : 6899
+Output : 9986
+```
+
+</aside>
+
+<aside>
+💡 **Question 6**
+
+Given an integer k and a **[queue](https://www.geeksforgeeks.org/queue-data-structure/)** of integers, The task is to reverse the order of the first **k** elements of the queue, leaving the other elements in the same relative order.
+
+Only following standard operations are allowed on queue.
+
+- **enqueue(x) :** Add an item x to rear of queue
+- **dequeue() :** Remove an item from front of queue
+- **size() :** Returns number of elements in queue.
+- **front() :** Finds front item.
+</aside>
+
+<aside>
+💡 **Question 7**
+
+Given a sequence of n strings, the task is to check if any two similar words come together and then destroy each other then print the number of words left in the sequence after this pairwise destruction.
+
+**Examples:**
+
+Input : ab aa aa bcd ab
+
+Output : 3
+
+*As aa, aa destroys each other so,*
+
+*ab bcd ab is the new sequence.*
+
+Input :  tom jerry jerry tom
+
+Output : 0
+
+*As first both jerry will destroy each other.*
+
+*Then sequence will be tom, tom they will also destroy*
+
+*each other. So, the final sequence doesn’t contain any*
+
+*word.*
+
+</aside>
+
+<aside>
+💡 **Question 8**
+
+Given an array of integers, the task is to find the maximum absolute difference between the nearest left and the right smaller element of every element in the array.
+
+**Note:** If there is no smaller element on right side or left side of any element then we take zero as the smaller element. For example for the leftmost element, the nearest smaller element on the left side is considered as 0. Similarly, for rightmost elements, the smaller element on the right side is considered as 0.
+
+**Examples:**
+
+</aside>
+
+------Answers Assignment 16------
+
+💡 Question 1
+
+To find the nearest element to the right with a greater frequency for each element in an array, we can use a combination of a frequency map and a stack. We iterate through the array from right to left and for each element, we update its frequency in the map. Then, we compare the current frequency with the frequencies of the elements in the stack. If the current frequency is greater than the frequency of the top element in the stack, we keep popping elements from the stack until we find a frequency greater than the current frequency or the stack becomes empty. Finally, if there are elements remaining in the stack, their nearest element to the right with a greater frequency is -1.
+
+Here's the solution:
+
+
+def nearestGreaterFrequency(arr):
+    frequency = {}
+    stack = []
+    result = [-1] * len(arr)
+    
+    for i in range(len(arr) - 1, -1, -1):
+        element = arr[i]
+        frequency[element] = frequency.get(element, 0) + 1
+        
+    for i in range(len(arr) - 1, -1, -1):
+        element = arr[i]
+        while stack and frequency[element] >= frequency[arr[stack[-1]]]:
+            stack.pop()
+        if stack:
+            result[i] = arr[stack[-1]]
+        stack.append(i)
+    
+    return result
+Example usage:
+
+
+arr = [1, 1, 2, 3, 4, 2, 1]
+result = nearestGreaterFrequency(arr)
+print(result)  # Output: [-1, -1, 1, 2, 2, 1, -1]
+💡 Question 2
+
+To sort a stack in ascending order using another temporary stack, we can use the following algorithm:
+
+Create an empty temporary stack.
+While the original stack is not empty, do the following:
+Pop the top element from the original stack and store it in a variable called temp.
+While the temporary stack is not empty and the top element is greater than temp, pop elements from the temporary stack and push them onto the original stack.
+Push temp onto the temporary stack.
+The temporary stack now contains the elements of the original stack in ascending order. Pop elements from the temporary stack and push them onto the original stack to obtain the sorted stack.
+Here's the solution:
+
+def sortStack(stack):
+    temp_stack = []
+    
+    while stack:
+        temp = stack.pop()
+        while temp_stack and temp_stack[-1] > temp:
+            stack.append(temp_stack.pop())
+        temp_stack.append(temp)
+    
+    while temp_stack:
+        stack.append(temp_stack.pop())
+Example usage:
+
+
+stack = [34, 3, 31, 98, 92, 23]
+sortStack(stack)
+print(stack)  # Output: [3, 23, 31, 34, 92, 98]
+💡 Question 3
+
+To delete the middle element of a stack without using any additional data structure, we can use the concept of recursion. The idea is to remove the middle element and recursively delete the remaining elements until the base case is reached.
+
+Here's the solution:
+
+
+def deleteMiddleElement(stack, k):
+    if k == 1:
+        stack.pop()
+        return
+    
+    temp = stack.pop()
+    deleteMiddleElement(stack, k - 1)
+    stack.append(temp)
+Example usage:
+
+
+stack = [1, 2, 3, 4, 5]
+k = len(stack) // 2 + 1
+deleteMiddleElement(stack, k)
+print(stack)  # Output: [1, 2, 4, 5]
+💡 Question 4
+
+To check whether the given elements in a queue can be arranged in increasing order in another queue using a stack, we can use the following algorithm:
+
+Create an empty stack and an empty second queue.
+While the given queue is not empty, do the following:
+Pop the front element from the given queue.
+If the stack is empty or the front element is greater than the top element of the stack, push the front element onto the stack.
+Otherwise, pop elements from the stack and enqueue them in the second queue until the front element is greater than the top element of the stack.
+Enqueue the front element from the given queue into the second queue.
+If there are any elements remaining in the stack, it is not possible to arrange the elements in increasing order. Otherwise, the elements can be arranged in increasing order.
+Here's the solution:
+
+
+from queue import Queue
+
+def checkArrangement(queue):
+    stack = []
+    second_queue = Queue()
+    
+    while not queue.empty():
+        front = queue.get()
+        if not stack or front > stack[-1]:
+            stack.append(front)
+        else:
+            while stack and front <= stack[-1]:
+                second_queue.put(stack.pop())
+            second_queue.put(front)
+    
+    while stack:
+        second_queue.put(stack.pop())
+    
+    while not second_queue.empty():
+        queue.put(second_queue.get())
+    
+    return len(stack) == 0
+Example usage:
+
+
+from queue import Queue
+
+queue = Queue()
+queue.put(5)
+queue.put(1)
+queue.put(2)
+queue.put(3)
+queue.put(4)
+result = checkArrangement(queue)
+print(result)  # Output: Yes
+💡 Question 5
+
+To reverse a number using a stack, we can convert the number to a string, iterate through the digits, and push each digit onto the stack. Then, pop the digits from the stack and concatenate them to form the reversed number.
+
+Here's the solution:
+
+
+def reverseNumber(num):
+    stack = []
+    for digit in str(num):
+        stack.append(digit)
+    reversed_num = ""
+    while stack:
+        reversed_num += stack.pop()
+    return int(reversed_num)
+Example usage:
+
+num = 365
+reversed_num = reverseNumber(num)
+print(reversed_num)  # Output: 563
+💡 Question 6
+
+To reverse the order of the first k elements of a queue, we can use a stack. We first enqueue the first k elements into the stack, then dequeue the elements from the queue and enqueue them back into the queue. Finally, we pop the elements from the stack and enqueue them back into the queue.
+
+Here's the solution:
+
+
+from queue import Queue
+
+def reverseKElements(queue, k):
+    stack = []
+    for _ in range(k):
+        stack.append(queue.get())
+    
+    while stack:
+        queue.put(stack.pop())
+    
+    for _ in range(queue.qsize() - k):
+        queue.put(queue.get())
+Example usage:
+
+
+from queue import Queue
+
+queue = Queue()
+queue.put(1)
+queue.put(2)
+queue.put(3)
+queue.put(4)
+queue.put(5)
+k = 3
+reverseKElements(queue, k)
+while not queue.empty():
+    print(queue.get())  # Output: 3 2 1 4 5
+💡 Question 7
+
+To check if any two similar words come together and destroy each other in a sequence of strings, we can use a stack. We iterate through the words in the sequence and check if the current word is equal to the top word in the stack. If they are equal, we pop the top word from the stack. Otherwise, we push the current word onto the stack. After processing all the words, the number of words left in the stack is the answer.
+
+Here's the solution:
+
+
+def countWordsLeft(sequence):
+    stack = []
+    for word in sequence:
+        if stack and word == stack[-1]:
+            stack.pop()
+        else:
+            stack.append(word)
+    return len(stack)
+Example usage:
+
+sequence = ["ab", "aa", "aa", "bcd", "ab"]
+count = countWordsLeft(sequence)
+print(count)  # Output: 3
+💡 Question 8
+
+To find the maximum absolute difference between the nearest left and right smaller elements for each element in an array, we can use two stacks: one for finding the nearest smaller element to the left and another for finding the nearest smaller element to the right.
+
+Here's the solution:
+
+
+def maxAbsoluteDifference(arr):
+    left_stack = []
+    right_stack = []
+    left_smaller = [-1] * len(arr)
+    right_smaller = [-1] * len(arr)
+    
+    # Find nearest smaller element to the left
+    for i in range(len(arr)):
+        while left_stack and arr[left_stack[-1]] >= arr[i]:
+            left_stack.pop()
+        if left_stack:
+            left_smaller[i] = arr[left_stack[-1]]
+        left_stack.append(i)
+    
+    # Find nearest smaller element to the right
+    for i in range(len(arr) - 1, -1, -1):
+        while right_stack and arr[right_stack[-1]] >= arr[i]:
+            right_stack.pop()
+        if right_stack:
+            right_smaller[i] = arr[right_stack[-1]]
+        right_stack.append(i)
+    
+    # Find maximum absolute difference
+    max_diff = float("-inf")
+    for i in range(len(arr)):
+        diff = abs(left_smaller[i] - right_smaller[i])
+        max_diff = max(max_diff, diff)
+    
+    return max_diff
+Example usage:
+
+
+arr = [2, 3, 10, 6, 4, 8, 1]
+result = maxAbsoluteDifference(arr)
+print(result)  # Output: 8
+

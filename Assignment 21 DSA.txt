@@ -1,0 +1,290 @@
+# Assignment Questions 21
+
+<aside>
+💡 Question-1
+
+You are given a binary tree. The binary tree is represented using the TreeNode class. Each TreeNode has an integer value and left and right children, represented using the TreeNode class itself. Convert this binary tree into a binary search tree.
+
+Input:
+
+        10
+
+       /   \
+
+     2      7
+
+   /   \
+
+ 8      4
+
+Output:
+
+        8
+
+      /   \
+
+    4     10
+
+  /   \
+
+2      7
+
+</aside>
+
+<aside>
+💡 Question-2:
+
+Given a Binary Search Tree with all unique values and two keys. Find the distance between two nodes in BST. The given keys always exist in BST.
+
+Example:
+
+Consider the following BST:
+
+![1.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f2455039-7e12-43fc-a7d3-b5be24931c1c/1.png)
+
+**Input-1:**
+
+n = 9
+
+values = [8, 3, 1, 6, 4, 7, 10, 14,13]
+
+node-1 = 6
+
+node-2 = 14
+
+**Output-1:**
+
+The distance between the two keys = 4
+
+**Input-2:**
+
+n = 9
+
+values = [8, 3, 1, 6, 4, 7, 10, 14,13]
+
+node-1 = 3
+
+node-2 = 4
+
+**Output-2:**
+
+The distance between the two keys = 2
+
+</aside>
+
+<aside>
+💡 Question-3:
+
+Write a program to convert a binary tree to a doubly linked list.
+
+Input:
+
+        10
+
+       /   \
+
+     5     20
+
+           /   \
+
+        30     35
+
+Output:
+
+5 10 30 20 35
+
+</aside>
+
+<aside>
+💡 Question-4:
+
+Write a program to connect nodes at the same level.
+
+Input:
+
+        1
+
+      /   \
+
+    2      3
+
+  /   \   /   \
+
+4     5 6    7
+
+Output:
+
+1 → -1
+
+2 → 3
+
+3 → -1
+
+4 → 5
+
+5 → 6
+
+6 → 7
+
+7 → -1
+
+</aside>
+
+-------Assignment Answers 21-----
+💡 Question 1: Convert Binary Tree to Binary Search Tree
+
+To convert a binary tree into a binary search tree, we can perform an in-order traversal of the binary tree and store the values of the tree nodes in a list. We then sort the list in ascending order. After sorting, we perform another in-order traversal of the binary tree and replace the values of the tree nodes with the sorted values from the list. This will transform the binary tree into a binary search tree.
+
+Here's the solution:
+
+
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def convertToBST(root):
+    if root is None:
+        return
+
+    nodes = []
+
+    def inorder(node):
+        if node is None:
+            return
+
+        inorder(node.left)
+        nodes.append(node.val)
+        inorder(node.right)
+
+    def assignValues(node):
+        if node is None:
+            return
+
+        assignValues(node.left)
+        node.val = nodes.pop(0)
+        assignValues(node.right)
+
+    inorder(root)
+    nodes.sort()
+    assignValues(root)
+
+    return root
+💡 Question 2: Find Distance Between Two Nodes in BST
+
+To find the distance between two nodes in a binary search tree (BST), we can start from the root and traverse down the BST until we reach the common ancestor of the two nodes. From the common ancestor, we can calculate the distances to both nodes by counting the number of edges traversed from the common ancestor to each node. The sum of these distances will give us the total distance between the two nodes.
+
+Here's the solution:
+
+
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def findDistance(root, node1, node2):
+    if root is None:
+        return 0
+
+    if node1 < root.val and node2 < root.val:
+        return findDistance(root.left, node1, node2)
+    elif node1 > root.val and node2 > root.val:
+        return findDistance(root.right, node1, node2)
+    else:
+        return distanceFromNode(root, node1) + distanceFromNode(root, node2)
+
+def distanceFromNode(root, target):
+    if root.val == target:
+        return 0
+    elif target < root.val:
+        return 1 + distanceFromNode(root.left, target)
+    else:
+        return 1 + distanceFromNode(root.right, target)
+💡 Question 3: Convert Binary Tree to Doubly Linked List
+
+To convert a binary tree to a doubly linked list, we can perform an in-order traversal of the binary tree. During the traversal, we maintain a reference to the previously visited node. At each node, we update the links between the current node and the previously visited node to form the doubly linked list. Finally, we return the head of the doubly linked list, which will be the leftmost node of the binary tree.
+
+Here's the solution:
+
+
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class DoublyLinkedListNode:
+    def __init__(self, val=0, prev=None, next=None):
+        self.val = val
+        self.prev = prev
+        self.next = next
+
+def convertToDoublyLinkedList(root):
+    if root is None:
+        return None
+
+    head = None
+    prev = None
+
+    def inorder(node):
+        nonlocal head, prev
+
+        if node is None:
+            return
+
+        inorder(node.left)
+
+        if prev is None:
+            head = DoublyLinkedListNode(node.val)
+            prev = head
+        else:
+            curr = DoublyLinkedListNode(node.val)
+            prev.next = curr
+            curr.prev = prev
+            prev = curr
+
+        inorder(node.right)
+
+    inorder(root)
+
+    return head
+💡 Question 4: Connect Nodes at the Same Level
+
+To connect nodes at the same level in a binary tree, we can perform a level-order traversal of the tree using a queue. While traversing each level, we link the nodes at the same level by updating their next pointers. At the end of each level, we set the next pointer of the last node to None. This process continues until all levels of the tree have been traversed.
+
+Here's the solution:
+
+
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None, next=None):
+        self.val = val
+        self.left = left
+        self.right = right
+        self.next = next
+
+def connectNodesAtSameLevel(root):
+    if root is None:
+        return None
+
+    queue = [root]
+
+    while queue:
+        level_size = len(queue)
+
+        for i in range(level_size):
+            node = queue.pop(0)
+
+            if i < level_size - 1:
+                node.next = queue[0]
+
+            if node.left:
+                queue.append(node.left)
+            if node.right:
+                queue.append(node.right)
+
+        node.next = None
+
+    return root
+
