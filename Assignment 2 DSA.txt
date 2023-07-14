@@ -1,0 +1,314 @@
+# Assignment Questions 2
+
+<aside>
+💡 **Question 1**
+Given an integer array nums of 2n integers, group these integers into n pairs (a1, b1), (a2, b2),..., (an, bn) such that the sum of min(ai, bi) for all i is maximized. Return the maximized sum.
+
+**Example 1:**
+Input: nums = [1,4,3,2]
+Output: 4
+
+**Explanation:** All possible pairings (ignoring the ordering of elements) are:
+
+1. (1, 4), (2, 3) -> min(1, 4) + min(2, 3) = 1 + 2 = 3
+2. (1, 3), (2, 4) -> min(1, 3) + min(2, 4) = 1 + 2 = 3
+3. (1, 2), (3, 4) -> min(1, 2) + min(3, 4) = 1 + 3 = 4
+So the maximum possible sum is 4
+</aside>
+
+<aside>
+💡 **Question 2**
+Alice has n candies, where the ith candy is of type candyType[i]. Alice noticed that she started to gain weight, so she visited a doctor. 
+
+The doctor advised Alice to only eat n / 2 of the candies she has (n is always even). Alice likes her candies very much, and she wants to eat the maximum number of different types of candies while still following the doctor's advice. 
+
+Given the integer array candyType of length n, return the maximum number of different types of candies she can eat if she only eats n / 2 of them.
+
+**Example 1:**
+Input: candyType = [1,1,2,2,3,3]
+Output: 3
+
+**Explanation**: Alice can only eat 6 / 2 = 3 candies. Since there are only 3 types, she can eat one of each type.
+
+</aside>
+
+<aside>
+💡 **Question 3**
+We define a harmonious array as an array where the difference between its maximum value
+and its minimum value is exactly 1.
+
+Given an integer array nums, return the length of its longest harmonious subsequence
+among all its possible subsequences.
+
+A subsequence of an array is a sequence that can be derived from the array by deleting some or no elements without changing the order of the remaining elements.
+
+**Example 1:**
+Input: nums = [1,3,2,2,5,2,3,7]
+Output: 5
+
+**Explanation:** The longest harmonious subsequence is [3,2,2,2,3].
+
+</aside>
+
+<aside>
+💡 **Question 4**
+You have a long flowerbed in which some of the plots are planted, and some are not.
+However, flowers cannot be planted in adjacent plots.
+Given an integer array flowerbed containing 0's and 1's, where 0 means empty and 1 means not empty, and an integer n, return true if n new flowers can be planted in the flowerbed without violating the no-adjacent-flowers rule and false otherwise.
+
+**Example 1:**
+Input: flowerbed = [1,0,0,0,1], n = 1
+Output: true
+
+</aside>
+
+<aside>
+💡 **Question 5**
+Given an integer array nums, find three numbers whose product is maximum and return the maximum product.
+
+**Example 1:**
+Input: nums = [1,2,3]
+Output: 6
+
+</aside>
+
+<aside>
+💡 **Question 6**
+Given an array of integers nums which is sorted in ascending order, and an integer target,
+write a function to search target in nums. If target exists, then return its index. Otherwise,
+return -1.
+
+You must write an algorithm with O(log n) runtime complexity.
+
+Input: nums = [-1,0,3,5,9,12], target = 9
+Output: 4
+
+**Explanation:** 9 exists in nums and its index is 4
+
+</aside>
+
+<aside>
+💡 **Question 7**
+An array is monotonic if it is either monotone increasing or monotone decreasing.
+
+An array nums is monotone increasing if for all i <= j, nums[i] <= nums[j]. An array nums is
+monotone decreasing if for all i <= j, nums[i] >= nums[j].
+
+Given an integer array nums, return true if the given array is monotonic, or false otherwise.
+
+**Example 1:**
+Input: nums = [1,2,2,3]
+Output: true
+
+</aside>
+
+<aside>
+💡 **Question 8**
+You are given an integer array nums and an integer k.
+
+In one operation, you can choose any index i where 0 <= i < nums.length and change nums[i] to nums[i] + x where x is an integer from the range [-k, k]. You can apply this operation at most once for each index i.
+
+The score of nums is the difference between the maximum and minimum elements in nums.
+
+Return the minimum score of nums after applying the mentioned operation at most once for each index in it.
+
+**Example 1:**
+Input: nums = [1], k = 0
+Output: 0
+
+**Explanation:** The score is max(nums) - min(nums) = 1 - 1 = 0.
+
+</aside>
+
+----assignment 2 Answers-----
+Question 1: Given an integer array nums of 2n integers, group these integers into n pairs (a1, b1), (a2, b2),..., (an, bn) such that the sum of min(ai, bi) for all i is maximized. Return the maximized sum.
+
+
+def arrayPairSum(nums):
+    nums.sort()
+    pairs_sum = 0
+    for i in range(0, len(nums), 2):
+        pairs_sum += nums[i]
+    return pairs_sum
+Explanation:
+
+We first sort the array nums in ascending order.
+To maximize the sum, we want to pair the smallest numbers with each other, the second smallest numbers with each other, and so on.
+By sorting the array, the smallest numbers will be at even indices (0, 2, 4, ...) and the second smallest numbers will be at odd indices (1, 3, 5, ...).
+We iterate through the sorted array, considering elements at even indices, and sum their values.
+Finally, we return the sum of the paired minimums.
+Example:
+
+nums = [1, 4, 3, 2]
+print(arrayPairSum(nums))
+Output: 4
+
+Question 2: Alice has n candies and wants to eat the maximum number of different types of candies while still following the doctor's advice. Return the maximum number of different types of candies she can eat if she only eats n / 2 of them.
+
+
+def distributeCandies(candyType):
+    max_candies = len(candyType) // 2
+    unique_candies = len(set(candyType))
+    return min(unique_candies, max_candies)
+Explanation:
+
+We calculate the maximum number of candies Alice can eat, which is half the total number of candies (n / 2).
+We calculate the number of unique candies by converting the candyType list into a set and getting its length.
+We return the minimum value between the number of unique candies and the maximum number of candies Alice can eat.
+Example:
+
+
+candyType = [1, 1, 2, 2, 3, 3]
+print(distributeCandies(candyType))
+Output: 3
+
+Question 3: Given an integer array nums, return the length of the longest harmonious subsequence among all its possible subsequences.
+
+def findLHS(nums):
+    num_count = {}
+    max_length = 0
+    for num in nums:
+        num_count[num] = num_count.get(num, 0) + 1
+        if num + 1 in num_count:
+            max_length = max(max_length, num_count[num] + num_count[num + 1])
+        if num - 1 in num_count:
+            max_length = max(max_length, num_count[num] + num_count[num - 1])
+    return max_length
+Explanation:
+
+We maintain a dictionary num_count to keep track of the count of each number in the array.
+We iterate through the array nums and update the count of each number in num_count.
+For each number, we check if its adjacent numbers (num + 1 and num - 1) are present in num_count.
+If either adjacent number is present, we update the maximum length by comparing the current length (num_count[num]) plus the count of the adjacent number.
+Finally, we return the maximum length.
+Example:
+
+nums = [1, 3, 2, 2, 5, 2, 3, 7]
+print(findLHS(nums))
+Output: 5
+
+Question 4: You have a long flowerbed in which some plots are planted and some are not. Given an integer array flowerbed containing 0's and 1's, and an integer n, return True if n new flowers can be planted in the flowerbed without violating the no-adjacent-flowers rule, and False otherwise.
+
+
+def canPlaceFlowers(flowerbed, n):
+    count = 0
+    i = 0
+    while i < len(flowerbed):
+        if flowerbed[i] == 0 and (i == 0 or flowerbed[i - 1] == 0) and (i == len(flowerbed) - 1 or flowerbed[i + 1] == 0):
+            flowerbed[i] = 1
+            count += 1
+        if count >= n:
+            return True
+        i += 1
+    return False
+Explanation:
+
+We iterate through the flowerbed and check each plot to see if it can accommodate a new flower.
+If a plot is 0 and the adjacent plots (if present) are also 0, we can plant a flower in that plot (changing the value to 1) and increment the count.
+We continue this process until we reach the end of the flowerbed or the count becomes equal to or greater than n.
+If the count becomes equal to or greater than n, it means we can plant n new flowers without violating the adjacent flowers rule, and we return True. Otherwise, we return False.
+Example:
+
+flowerbed = [1, 0, 0, 0, 1]
+n = 1
+print(canPlaceFlowers(flowerbed, n))
+Output: True
+
+Question 5: Given an integer array nums, find three numbers whose product is maximum and return the maximum product.
+
+
+def maximumProduct(nums):
+    nums.sort()
+    n = len(nums)
+    return max(nums[0] * nums[1] * nums[n - 1], nums[n - 3] * nums[n - 2] * nums[n - 1])
+Explanation:
+
+We first sort the array nums in ascending order.
+The maximum product can be obtained by multiplying the three largest numbers in the sorted array (nums[n - 3], nums[n - 2], nums[n - 1]) or the two smallest negative numbers with the largest positive number (nums[0], nums[1], nums[n - 1]).
+We compare the two possibilities and return the maximum product.
+Example:
+
+
+nums = [1, 2, 3]
+print(maximumProduct(nums))
+Output: 6
+
+Question 6: Given an array of integers nums which is sorted in ascending order, and an integer target, write a function to search target in nums. If target exists, return its index. Otherwise, return -1. You must write an algorithm with O(log n) runtime complexity.
+
+
+def search(nums, target):
+    left, right = 0, len(nums) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if nums[mid] == target:
+            return mid
+        elif nums[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return -1
+Explanation:
+
+We perform a binary search to find the target value in the sorted array nums.
+We maintain two pointers, left and right, that represent the start and end indices of the search range.
+We repeatedly compare the middle element of the current range with the target.
+If the middle element is equal to the target, we return its index.
+If the middle element is smaller than the target, we update left to be mid + 1 to search in the right half of the array.
+If the middle element is larger than the target, we update right to be mid - 1 to search in the left half of the array.
+If the search range is exhausted and the target is not found, we return -1.
+Example:
+nums = [-1, 0, 3, 5, 9, 12]
+target = 9
+print(search(nums, target))
+Output: 4
+
+Question 7: Given an integer array nums, return true if the given array is monotonic, or false otherwise.
+
+
+def isMonotonic(nums):
+    increasing = decreasing = True
+    for i in range(1, len(nums)):
+        if nums[i] > nums[i - 1]:
+            decreasing = False
+        if nums[i] < nums[i - 1]:
+            increasing = False
+    return increasing or decreasing
+Explanation:
+
+We initialize two flags, increasing and decreasing, as True.
+We iterate through the array nums starting from the second element.
+If we find an element that is greater than the previous element, we set the decreasing flag to False.
+If we find an element that is smaller than the previous element, we set the increasing flag to False.
+If either flag becomes False, it means the array is not monotonic in that direction.
+We return True if either flag is still True, indicating that the array is monotonic in at least one direction.
+Example:
+
+
+nums = [1, 2, 2, 3]
+print(isMonotonic(nums))
+Output: True
+
+Question 8: You are given an integer array nums and an integer k. Return the minimum score of nums after applying the mentioned operation at most once for each index in it.
+
+
+def minimumScore(nums, k):
+    nums.sort()
+    score = nums[-1] - nums[0]
+    for i in range(len(nums) - 1, k - 1, -1):
+        score = min(score, nums[i] - nums[i - k + 1])
+    return score
+Explanation:
+
+We first sort the array nums in ascending order.
+We calculate the initial score as the difference between the maximum and minimum elements (nums[-1] - nums[0]).
+We iterate from the last index (len(nums) - 1) to k (inclusive) in reverse order.
+For each index i, we calculate the score by subtracting the difference between the current element (nums[i]) and the element at i - k + 1 from the previous score.
+We update the score as the minimum value between the current score and the calculated score.
+Finally, we return the minimum score.
+Example:
+
+
+nums = [1]
+k = 0
+print(minimumScore(nums, k))
+Output: 0

@@ -1,0 +1,300 @@
+# Assignment Questions 9
+
+<aside>
+💡 **Question 1**
+
+Given an integer `n`, return *`true` if it is a power of two. Otherwise, return `false`*.
+
+An integer `n` is a power of two, if there exists an integer `x` such that `n == 2x`.
+
+**Example 1:**
+Input: n = 1 
+
+Output: true
+
+**Example 2:**
+Input: n = 16 
+
+Output: true
+
+**Example 3:**
+Input: n = 3 
+
+Output: false
+
+</aside>
+
+<aside>
+💡 **Question 2**
+
+Given a number n, find the sum of the first natural numbers.
+
+**Example 1:**
+
+Input: n = 3 
+
+Output: 6
+
+**Example 2:**
+
+Input  : 5 
+
+Output : 15
+
+</aside>
+
+<aside>
+💡 **Question 3**
+
+****Given a positive integer, N. Find the factorial of N. 
+
+**Example 1:**
+
+Input: N = 5 
+
+Output: 120
+
+**Example 2:**
+
+Input: N = 4
+
+Output: 24
+
+</aside>
+
+<aside>
+💡 **Question 4**
+
+Given a number N and a power P, the task is to find the exponent of this number raised to the given power, i.e. N^P.
+
+**Example 1 :** 
+
+Input: N = 5, P = 2
+
+Output: 25
+
+**Example 2 :**
+Input: N = 2, P = 5
+
+Output: 32
+
+</aside>
+
+<aside>
+💡 **Question 5**
+
+Given an array of integers **arr**, the task is to find maximum element of that array using recursion.
+
+**Example 1:**
+
+Input: arr = {1, 4, 3, -5, -4, 8, 6};
+Output: 8
+
+**Example 2:**
+
+Input: arr = {1, 4, 45, 6, 10, -8};
+Output: 45
+
+</aside>
+
+<aside>
+💡 **Question 6**
+
+Given first term (a), common difference (d) and a integer N of the Arithmetic Progression series, the task is to find Nth term of the series.
+
+**Example 1:**
+
+Input : a = 2 d = 1 N = 5
+Output : 6
+The 5th term of the series is : 6
+
+**Example 2:**
+
+Input : a = 5 d = 2 N = 10
+Output : 23
+The 10th term of the series is : 23
+
+</aside>
+
+<aside>
+💡 **Question 7**
+
+Given a string S, the task is to write a program to print all permutations of a given string.
+
+**Example 1:**
+
+***Input:***
+
+*S = “ABC”*
+
+***Output:***
+
+*“ABC”, “ACB”, “BAC”, “BCA”, “CBA”, “CAB”*
+
+**Example 2:**
+
+***Input:***
+
+*S = “XY”*
+
+***Output:***
+
+*“XY”, “YX”*
+
+</aside>
+
+<aside>
+💡 **Question 8**
+
+Given an array, find a product of all array elements.
+
+**Example 1:**
+
+Input  : arr[] = {1, 2, 3, 4, 5}
+Output : 120
+**Example 2:**
+
+Input  : arr[] = {1, 6, 3}
+Output : 18
+
+</aside>
+
+----Assignment answers 9-------
+💡 Question 1
+
+To determine if an integer n is a power of two, we can check if n is greater than 0 and if n has only one bit set in its binary representation. If both conditions are true, then n is a power of two.
+
+Here's the solution:
+
+def isPowerOfTwo(n):
+    return n > 0 and (n & (n - 1)) == 0
+Example usage:
+
+
+print(isPowerOfTwo(1))  # Output: True
+print(isPowerOfTwo(16))  # Output: True
+print(isPowerOfTwo(3))  # Output: False
+💡 Question 2
+
+To find the sum of the first n natural numbers, we can use the formula (n * (n + 1)) / 2. This formula gives us the sum of an arithmetic series with the first term 1, common difference 1, and n terms.
+
+Here's the solution:
+
+
+def sumOfNaturalNumbers(n):
+    return (n * (n + 1)) // 2
+Example usage:
+
+
+print(sumOfNaturalNumbers(3))  # Output: 6
+print(sumOfNaturalNumbers(5))  # Output: 15
+💡 Question 3
+
+To find the factorial of a positive integer N, we can use recursion. The factorial of N is defined as the product of all positive integers from 1 to N.
+
+Here's the solution:
+
+
+def factorial(N):
+    if N == 0 or N == 1:
+        return 1
+    else:
+        return N * factorial(N - 1)
+Example usage:
+
+
+print(factorial(5))  # Output: 120
+print(factorial(4))  # Output: 24
+💡 Question 4
+
+To find N raised to the power P, we can use the ** operator in Python.
+
+Here's the solution:
+
+
+def exponent(N, P):
+    return N ** P
+Example usage:
+
+
+print(exponent(5, 2))  # Output: 25
+print(exponent(2, 5))  # Output: 32
+💡 Question 5
+
+To find the maximum element of an array arr using recursion, we can define a recursive function that compares each element with the maximum element found so far. The base case is when the array has only one element, in which case that element is the maximum.
+
+Here's the solution:
+
+
+def maxElement(arr):
+    if len(arr) == 1:
+        return arr[0]
+    else:
+        return max(arr[0], maxElement(arr[1:]))
+Example usage:
+
+
+arr = [1, 4, 3, -5, -4, 8, 6]
+print(maxElement(arr))  # Output: 8
+💡 Question 6
+
+To find the Nth term of an arithmetic progression series with the first term a, common difference d, we can use the formula a + (N - 1) * d.
+
+Here's the solution:
+
+def nthTerm(a, d, N):
+    return a + (N - 1) * d
+Example usage:
+
+
+print(nthTerm(2, 1, 5))  # Output: 6
+print(nthTerm(5, 2, 10))  # Output: 23
+💡 Question 7
+
+To generate all permutations of a given string S, we can use recursion. We fix each character of S at the beginning and recursively generate permutations of the remaining characters. We swap the fixed character with each character from its right to generate different permutations.
+
+Here's the solution:
+
+
+def permutations(S):
+    result = []
+    generatePermutations(list(S), 0, len(S) - 1, result)
+    return result
+
+def generatePermutations(arr, left, right, result):
+    if left == right:
+        result.append("".join(arr))
+    else:
+        for i in range(left, right + 1):
+            arr[left], arr[i] = arr[i], arr[left]
+            generatePermutations(arr, left + 1, right, result)
+            arr[left], arr[i] = arr[i], arr[left]  # Backtrack
+
+Example usage:
+
+
+S = "ABC"
+print(permutations(S))  # Output: ["ABC", "ACB", "BAC", "BCA", "CBA", "CAB"]
+
+S = "XY"
+print(permutations(S))  # Output: ["XY", "YX"]
+💡 Question 8
+
+To find the product of all elements in an array arr, we can use recursion. The base case is when the array has only one element, in which case the product is the element itself. Otherwise, we multiply the first element with the product of the remaining elements.
+
+Here's the solution:
+
+
+def productOfArray(arr):
+    if len(arr) == 1:
+        return arr[0]
+    else:
+        return arr[0] * productOfArray(arr[1:])
+Example usage:
+
+
+arr = [1, 2, 3, 4, 5]
+print(productOfArray(arr))  # Output: 120
+
+arr = [1, 6, 3]
+print(productOfArray(arr))  # Output: 18
